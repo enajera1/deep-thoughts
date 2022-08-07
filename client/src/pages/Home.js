@@ -1,9 +1,11 @@
 import React from 'react';
 import { useQuery } from '@apollo/client'; // allows us to make requests to gql
 import { QUERY_THOUGHTS, QUERY_ME_BASIC } from '../utils/queries'; //allows user to see both thoughts from randoms as well as friends thoughts to the side
+import Auth from '../utils/auth'; 
+
 import ThoughtList from '../components/ThoughtList';
 import FriendList from '../components/FriendList'; 
-import Auth from '../utils/auth'; 
+import ThoughtForm from '../components/ThoughtForm';
 
 const Home = () => {
   // use useQuery hook to make query request
@@ -17,7 +19,12 @@ const Home = () => {
 
   return (
     <main>
-      <div className="flex-row justify-space-between">
+        <div className="flex-row justify-space-between">
+          {loggedIn && (
+            <div className="col-12 mb-3">
+              <ThoughtForm />
+            </div>
+          )}
         <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
           {loading ? (
             <div>Loading...</div>
